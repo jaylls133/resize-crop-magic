@@ -169,5 +169,101 @@ export const presetSizes = [
   { name: 'YouTube Thumbnail', width: 1280, height: 720 },
   { name: 'HD (1080p)', width: 1920, height: 1080 },
   { name: 'Website Banner', width: 1200, height: 400 },
-  { name: 'Profile Picture', width: 400, height: 400 }
+  { name: 'Profile Picture', width: 400, height: 400 },
+  { name: 'LinkedIn Banner', width: 1584, height: 396 }
 ];
+
+/**
+ * New: Convert image format
+ */
+export const convertImageFormat = (
+  image: HTMLImageElement,
+  format: 'image/jpeg' | 'image/png' | 'image/webp' | 'image/gif',
+  quality: number = 0.92
+): string => {
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  
+  canvas.width = image.width;
+  canvas.height = image.height;
+  
+  if (ctx) {
+    ctx.drawImage(image, 0, 0);
+  }
+  
+  // Convert to the specified format with quality level (0.0 to 1.0)
+  return canvas.toDataURL(format, quality);
+};
+
+/**
+ * New: Compress image with specified quality
+ */
+export const compressImage = (
+  image: HTMLImageElement,
+  quality: number = 0.7
+): string => {
+  // Extract the format from image source if possible
+  let format = 'image/jpeg';
+  if (image.src.includes('image/png')) {
+    format = 'image/png';
+  } else if (image.src.includes('image/webp')) {
+    format = 'image/webp';
+  }
+  
+  const canvas = document.createElement('canvas');
+  const ctx = canvas.getContext('2d');
+  
+  canvas.width = image.width;
+  canvas.height = image.height;
+  
+  if (ctx) {
+    ctx.drawImage(image, 0, 0);
+  }
+  
+  // Apply compression by specifying quality
+  return canvas.toDataURL(format, quality);
+};
+
+/**
+ * New: Image format options
+ */
+export const imageFormatOptions = [
+  { label: 'JPG', value: 'image/jpeg', extension: 'jpg' },
+  { label: 'PNG', value: 'image/png', extension: 'png' },
+  { label: 'WebP', value: 'image/webp', extension: 'webp' }
+];
+
+/**
+ * New: Get file size from base64 string (approximate)
+ */
+export const getFileSizeFromBase64 = (base64String: string): number => {
+  const base64 = base64String.split(',')[1];
+  return Math.ceil((base64.length * 3) / 4);
+};
+
+/**
+ * New: Social media presets with proper dimensions
+ */
+export const socialMediaPresets = [
+  { name: 'Instagram Post', width: 1080, height: 1080, description: 'Perfect square for feed posts' },
+  { name: 'Instagram Story', width: 1080, height: 1920, description: 'Vertical format for stories' },
+  { name: 'Facebook Post', width: 1200, height: 630, description: 'Optimal for timeline posts' },
+  { name: 'Facebook Cover', width: 851, height: 315, description: 'Page or profile cover' },
+  { name: 'Twitter Post', width: 1200, height: 675, description: 'Ideal aspect ratio for tweets' },
+  { name: 'LinkedIn Post', width: 1200, height: 627, description: 'Professional feed posts' },
+  { name: 'LinkedIn Banner', width: 1584, height: 396, description: 'Profile banner' },
+  { name: 'YouTube Thumbnail', width: 1280, height: 720, description: 'HD video thumbnail' },
+  { name: 'Pinterest Pin', width: 1000, height: 1500, description: 'Vertical pin format' }
+];
+
+/**
+ * New: Add alt text to an image element for accessibility and SEO
+ */
+export const addImageAltText = (
+  imgElement: HTMLImageElement, 
+  originalFileName: string, 
+  editType: 'resized' | 'cropped'
+): void => {
+  const fileNameWithoutExtension = originalFileName.replace(/\.[^/.]+$/, "");
+  imgElement.alt = `${editType} version of ${fileNameWithoutExtension}`;
+};

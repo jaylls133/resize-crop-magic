@@ -12,7 +12,8 @@ import ImageUploader from "@/components/ImageUploader";
 import { 
   maintainAspectRatio, 
   resizeImage, 
-  presetSizes, 
+  presetSizes,
+  socialMediaPresets,
   ImageDimensions 
 } from "@/utils/imageUtils";
 
@@ -102,8 +103,10 @@ const Resize = () => {
     if (resizedImageSrc && originalFile) {
       // Store data in session storage to pass to preview page
       sessionStorage.setItem('editedImageSrc', resizedImageSrc);
+      sessionStorage.setItem('originalImageSrc', resizedImageSrc); // Store for format conversion
       sessionStorage.setItem('originalFileName', originalFile.name);
       sessionStorage.setItem('dimensions', JSON.stringify({ width, height }));
+      sessionStorage.setItem('editType', 'resized');
       navigate('/preview');
     } else {
       toast.error("Please resize an image first");
@@ -146,7 +149,7 @@ const Resize = () => {
               <div className="canvas-container bg-gray-100 flex items-center justify-center overflow-hidden max-h-[500px]">
                 <img
                   src={resizedImageSrc || originalImage.src}
-                  alt={resizedImageSrc ? "Resized image" : "Original image"}
+                  alt={resizedImageSrc ? `Resized version of ${originalFile?.name}` : `Original image ${originalFile?.name}`}
                   className="max-w-full max-h-[500px] object-contain"
                 />
               </div>
@@ -264,6 +267,25 @@ const Resize = () => {
                 {/* Preset Sizes */}
                 <TabsContent value="presets">
                   <div className="space-y-2">
+                    <p className="text-sm text-muted-foreground mb-2">Social Media Presets:</p>
+                    {socialMediaPresets.map((preset, index) => (
+                      <Button
+                        key={index}
+                        variant="outline"
+                        className="w-full justify-between mb-2 py-2 text-left"
+                        onClick={() => handlePresetSelect(preset)}
+                      >
+                        <div>
+                          <span className="font-medium">{preset.name}</span>
+                          <p className="text-xs text-muted-foreground">{preset.description}</p>
+                        </div>
+                        <span className="text-muted-foreground text-xs whitespace-nowrap">
+                          {preset.width} × {preset.height}
+                        </span>
+                      </Button>
+                    ))}
+                    
+                    <p className="text-sm text-muted-foreground mb-2 mt-4">Common Presets:</p>
                     {presetSizes.map((preset, index) => (
                       <Button
                         key={index}

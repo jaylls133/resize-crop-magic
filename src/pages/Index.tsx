@@ -2,6 +2,7 @@
 import { Link } from "react-router-dom";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion";
 
 const Index = () => {
   return (
@@ -145,6 +146,106 @@ const Index = () => {
                 Preview your edited image and download it in high quality directly to your device.
               </p>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* New: Social Media Presets Section */}
+      <section className="py-16 bg-gray-50">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
+            Perfect for Social Media
+          </h2>
+          <p className="text-center text-lg text-muted-foreground mb-12 max-w-3xl mx-auto">
+            Get your images ready for various platforms with our preset sizes
+          </p>
+          
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+            <Card className="text-center">
+              <CardContent className="p-4">
+                <h3 className="font-medium">Instagram Post</h3>
+                <p className="text-xs text-muted-foreground">1080 × 1080 px</p>
+              </CardContent>
+            </Card>
+            <Card className="text-center">
+              <CardContent className="p-4">
+                <h3 className="font-medium">Facebook Post</h3>
+                <p className="text-xs text-muted-foreground">1200 × 630 px</p>
+              </CardContent>
+            </Card>
+            <Card className="text-center">
+              <CardContent className="p-4">
+                <h3 className="font-medium">Twitter Post</h3>
+                <p className="text-xs text-muted-foreground">1200 × 675 px</p>
+              </CardContent>
+            </Card>
+            <Card className="text-center">
+              <CardContent className="p-4">
+                <h3 className="font-medium">LinkedIn Banner</h3>
+                <p className="text-xs text-muted-foreground">1584 × 396 px</p>
+              </CardContent>
+            </Card>
+          </div>
+          
+          <div className="text-center mt-8">
+            <Button asChild>
+              <Link to="/resize">Try Resizing Now</Link>
+            </Button>
+          </div>
+        </div>
+      </section>
+
+      {/* FAQ Section - SEO Rich Snippets */}
+      <section className="py-16">
+        <div className="container mx-auto px-4">
+          <h2 className="text-3xl md:text-4xl font-bold text-center mb-8">
+            Frequently Asked Questions
+          </h2>
+          
+          <div className="max-w-3xl mx-auto">
+            <Accordion type="single" collapsible className="w-full">
+              <AccordionItem value="item-1">
+                <AccordionTrigger>Is my image uploaded to a server?</AccordionTrigger>
+                <AccordionContent>
+                  No, all image processing is done locally in your browser. Your images never leave your device, 
+                  ensuring complete privacy and faster processing times.
+                </AccordionContent>
+              </AccordionItem>
+              
+              <AccordionItem value="item-2">
+                <AccordionTrigger>What image formats are supported?</AccordionTrigger>
+                <AccordionContent>
+                  Our tool supports all common image formats including JPG, PNG, WEBP, and GIF. 
+                  You can also convert between these formats easily.
+                </AccordionContent>
+              </AccordionItem>
+              
+              <AccordionItem value="item-3">
+                <AccordionTrigger>Will resizing reduce my image quality?</AccordionTrigger>
+                <AccordionContent>
+                  We use high-quality algorithms to maintain image quality during resizing. 
+                  However, when significantly reducing image dimensions, some quality loss is unavoidable. 
+                  For best results, avoid upscaling images to dimensions larger than the original.
+                </AccordionContent>
+              </AccordionItem>
+              
+              <AccordionItem value="item-4">
+                <AccordionTrigger>Is there a file size limit?</AccordionTrigger>
+                <AccordionContent>
+                  Since all processing happens in your browser, the file size limit depends on your device's memory. 
+                  Most modern devices can easily handle images up to 20MB. For very large images, you may experience 
+                  slower performance.
+                </AccordionContent>
+              </AccordionItem>
+              
+              <AccordionItem value="item-5">
+                <AccordionTrigger>Can I use this tool for commercial purposes?</AccordionTrigger>
+                <AccordionContent>
+                  Yes! Image Editor Pro is free for both personal and commercial use. There are no restrictions 
+                  on how you use your edited images.
+                </AccordionContent>
+              </AccordionItem>
+            </Accordion>
           </div>
         </div>
       </section>

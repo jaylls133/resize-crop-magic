@@ -11,6 +11,7 @@ import Resize from "./pages/Resize";
 import Crop from "./pages/Crop";
 import Preview from "./pages/Preview";
 import About from "./pages/About";
+import FAQ from "./pages/FAQ";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
               <Route path="/crop" element={<Crop />} />
               <Route path="/preview" element={<Preview />} />
               <Route path="/about" element={<About />} />
+              <Route path="/faq" element={<FAQ />} />
               <Route path="*" element={<NotFound />} />
             </Routes>
           </main>

@@ -220,7 +220,9 @@ const Crop = () => {
     if (croppedImageSrc && originalFile) {
       // Store data in session storage to pass to preview page
       sessionStorage.setItem('editedImageSrc', croppedImageSrc);
+      sessionStorage.setItem('originalImageSrc', croppedImageSrc); // Store for format conversion
       sessionStorage.setItem('originalFileName', originalFile.name);
+      sessionStorage.setItem('editType', 'cropped');
       
       // Store crop dimensions
       if (cropBox) {
@@ -295,7 +297,7 @@ const Crop = () => {
                 {croppedImageSrc ? (
                   <img
                     src={croppedImageSrc}
-                    alt="Cropped image"
+                    alt={`Cropped version of ${originalFile?.name}`}
                     className="max-w-full max-h-[500px] object-contain"
                   />
                 ) : (
